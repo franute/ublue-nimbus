@@ -54,16 +54,22 @@ COPY build.sh /tmp/build.sh
 COPY configs/gschema-overrides/zz1-nimbus.gschema.override /usr/share/glib-2.0/schemas/zz1-nimbus.gschema.override
 COPY configs/udev/50-qmk.rules /usr/lib/udev/rules.d/50-qmk.rules
 
+RUN mkdir -p /var/lib/alternatives && \
+    /tmp/build.sh && \
+    /tmp/install_autofirma.sh && \
+    /tmp/cleanup.sh && \
+    ostree container commit
+
 COPY configs/scripts/autofirma/autofirma.md5 /tmp/autofirma.md5
 COPY configs/scripts/autofirma/install_autofirma.sh /tmp/install_autofirma.sh
 
 COPY configs/scripts/cleanup.sh /tmp/cleanup.sh
 
 RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
     /tmp/install_autofirma.sh && \
     /tmp/cleanup.sh && \
     ostree container commit
+
 ## NOTES:build.sh
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
 # - All RUN commands must end with ostree container commit

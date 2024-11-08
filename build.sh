@@ -36,12 +36,12 @@ systemctl disable NetworkManager-wait-online
 
 ### Cleanup ###
 
+# Disable newly added repositories
+sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/atim-starship-fedora-"${RELEASE}".repo
+sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/atim-ubuntu-fonts-fedora-"${RELEASE}".repo
+
 # Remove unnecessary packages
 rpm-ostree cleanup -m
 
 # Remove temporary files and caches
 rm -rf /var/cache/dnf /var/lib/dnf /tmp/* /var/tmp/*
-
-# Disable newly added repositories
-sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/atim-starship-fedora-"${RELEASE}".repo
-sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/atim-ubuntu-fonts-fedora-"${RELEASE}".repo
