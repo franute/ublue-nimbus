@@ -28,6 +28,25 @@ rpm-ostree override remove virtualbox-guest-additions \
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
 
+### Install Autofirma ###
+echo "Downloading dependencies"
+curl -O https://estaticos.redsara.es/comunes/autofirma/currentversion/AutoFirma_Linux_Fedora.zip
+curl -L https://raw.githubusercontent.com/franute/ublue-nimbus/main/configs/scripts/autofirma.md5 > autofirma.md5
+unzip AutoFirma_Linux_Fedora.zip
+
+if md5sum -c autofirma.md5 > /dev/null; then
+    echo "MD5Sum validated, installing autofirma."
+    rpm-ostree install -y ./autofirma-1.8.3-1.noarch_FEDORA.rpm
+else
+    echo "Incorrect MD5Sum"
+fi
+
+### Cleanup ###
+echo "Deleting downloaded files"
+rm autofirma.md5
+rm AutoFirma_Linux_Fedora.zip
+rm autofirma-1.8.3-1.noarch_FEDORA.rpm
+
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
@@ -39,3 +58,9 @@ systemctl disable NetworkManager-wait-online
 # Disable newly added repositories
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/atim-starship-fedora-"${RELEASE}".repo
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/atim-ubuntu-fonts-fedora-"${RELEASE}".repo
+
+# Remove unnecessary packages
+rpm-ostree cleanup -m
+
+# Remove temporary files and caches
+rm -rf /var/cache/dnf /var/lib/dnf /tmp/* /var/tmp/*

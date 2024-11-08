@@ -58,14 +58,6 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
 
-COPY configs/scripts/install_autofirma.sh /tmp/install_autofirma.sh
-COPY configs/scripts/cleanup.sh /tmp/cleanup.sh
-
-RUN mkdir -p /var/lib/alternatives && \
-    /tmp/install_autofirma.sh && \
-    /tmp/cleanup.sh && \
-    ostree container commit
-
 ## NOTES:build.sh
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
 # - All RUN commands must end with ostree container commit
