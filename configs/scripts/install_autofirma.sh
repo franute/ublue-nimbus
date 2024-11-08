@@ -8,7 +8,7 @@ set -oue pipefail
 # Your code goes here.
 echo "Downloading dependencies"
 curl -O https://estaticos.redsara.es/comunes/autofirma/currentversion/AutoFirma_Linux_Fedora.zip
-curl -L https://raw.githubusercontent.com/franute/nimbus-os/main/files/scripts/autofirma.md5 > autofirma.md5
+curl -L https://raw.githubusercontent.com/franute/ublue-nimbus/main/configs/scripts/autofirma.md5 > autofirma.md5
 unzip AutoFirma_Linux_Fedora.zip
 
 if md5sum -c autofirma.md5 > /dev/null; then

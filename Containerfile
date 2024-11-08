@@ -56,13 +56,9 @@ COPY configs/udev/50-qmk.rules /usr/lib/udev/rules.d/50-qmk.rules
 
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
-    /tmp/install_autofirma.sh && \
-    /tmp/cleanup.sh && \
     ostree container commit
 
-COPY configs/scripts/autofirma/autofirma.md5 /tmp/autofirma.md5
-COPY configs/scripts/autofirma/install_autofirma.sh /tmp/install_autofirma.sh
-
+COPY configs/scripts/install_autofirma.sh /tmp/install_autofirma.sh
 COPY configs/scripts/cleanup.sh /tmp/cleanup.sh
 
 RUN mkdir -p /var/lib/alternatives && \
