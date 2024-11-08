@@ -52,6 +52,7 @@ COPY build.sh /tmp/build.sh
 
 # Copy custom configs
 COPY configs/gschema-overrides/zz1-nimbus.gschema.override /usr/share/glib-2.0/schemas/zz1-nimbus.gschema.override
+COPY configs/udev/50-qmk.rules /usr/lib/udev/rules.d/50-qmk.rules
 
 COPY configs/autofirma/autofirma.md5 /tmp/autofirma.md5
 COPY configs/autofirma/install_autofirma.sh /tmp/autofirma.md5
