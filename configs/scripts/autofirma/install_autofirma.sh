@@ -23,9 +23,3 @@ echo "Deleting downloaded files"
 rm autofirma.md5
 rm AutoFirma_Linux_Fedora.zip
 rm autofirma-1.8.3-1.noarch_FEDORA.rpm
-
-# Remove unnecessary packages
-rpm-ostree cleanup -m
-
-# Remove temporary files and caches
-rm -rf /var/cache/dnf /var/lib/dnf /tmp/* /var/tmp/*
