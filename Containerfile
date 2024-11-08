@@ -50,6 +50,9 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 
 COPY build.sh /tmp/build.sh
 
+# Copy custom configs
+COPY configs/gschema-overrides/zz1-nimbus.gschema.override /usr/share/glib-2.0/schemas/zz1-nimbus.gschema.override
+
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
