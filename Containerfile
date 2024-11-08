@@ -55,7 +55,7 @@ COPY configs/gschema-overrides/zz1-nimbus.gschema.override /usr/share/glib-2.0/s
 COPY configs/udev/50-qmk.rules /usr/lib/udev/rules.d/50-qmk.rules
 
 COPY configs/autofirma/autofirma.md5 /tmp/autofirma.md5
-COPY configs/autofirma/install_autofirma.sh /tmp/autofirma.md5
+COPY configs/autofirma/install_autofirma.sh /tmp/install_autofirma.sh
 
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
