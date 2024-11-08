@@ -53,10 +53,14 @@ COPY build.sh /tmp/build.sh
 # Copy custom configs
 COPY configs/gschema-overrides/zz1-nimbus.gschema.override /usr/share/glib-2.0/schemas/zz1-nimbus.gschema.override
 
+COPY configs/autofirma/autofirma.md5 /tmp/autofirma.md5
+COPY configs/autofirma/install_autofirma.sh /tmp/autofirma.md5
+
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
+    /tmp/install_autofirma.sh && \
     ostree container commit
-## NOTES:
+## NOTES:build.sh
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
 # - All RUN commands must end with ostree container commit
 #   see: https://coreos.github.io/rpm-ostree/container/#using-ostree-container-commit
